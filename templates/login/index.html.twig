@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello LoginController!{% endblock %}
+
+{% block body %}
+	{% if error %}
+		<div class="alert alert-danger">
+			{{ error.messageKey|trans(error.messageData, 'security') }}
+		</div>
+	{% endif %}
+
+	<style>
+		.signin {
+			max-width: 350px;
+		}
+	</style>
+
+	<div class="signin w-100 mw-25 m-auto p-2">
+		<form action="{{ path('login') }}" method="post">
+			<h1 class="h3 mb-3 fw-normal">Please sign in</h1>
+
+			<div class="form-floating">
+				<input type="email" class="form-control" placeholder="name@example.com" id="username" name="_username" value="{{ last_username }}" />
+				<label for="username">Email address</label>
+			</div>
+
+			<div class="form-floating">
+				<input type="password" class="form-control" placeholder="Password" id="password" name="_password" />
+				<label for="password">Password</label>
+			</div>
+
+			<input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+
+			<button class="w-100 btn btn-lg btn-primary" type="submit">login</button>
+		</form>
+		New user? <a href="/register">Register an account</a>
+	</div>
+{% endblock %}
